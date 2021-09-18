@@ -213,19 +213,7 @@ public class Product extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
-        df =(DefaultTableModel)jTable1.getModel();
-        int selected = jTable1.getSelectedRow();
-        int id = Integer.parseInt(df.getValueAt(selected, 0).toString());
-
-        txtPname.setText(df.getValueAt(selected, 1).toString());
-        txtDes.setText(df.getValueAt(selected, 2).toString());
-        txtQty.setText(df.getValueAt(selected, 3).toString());
-        txtBarcode.setText(df.getValueAt(selected, 4).toString());
-        txtCost.setText(df.getValueAt(selected, 5).toString());
-        txtRetail.setText(df.getValueAt(selected, 6).toString());
-        txtLimit.setText(df.getValueAt(selected, 7).toString());
-
-        jButton2.setEnabled(false);
+        
 
     }//GEN-LAST:event_jTable1MouseClicked
 

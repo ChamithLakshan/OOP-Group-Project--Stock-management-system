@@ -200,16 +200,6 @@ public class Vendor extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
 
-        df =(DefaultTableModel)jTable1.getModel();
-        int selected = jTable1.getSelectedRow();
-        int id = Integer.parseInt(df.getValueAt(selected, 0).toString());
-
-        txtName.setText(df.getValueAt(selected, 1).toString());
-        txtPhone.setText(df.getValueAt(selected, 2).toString());
-        txtEmail.setText(df.getValueAt(selected, 3).toString());
-        txtAddress.setText(df.getValueAt(selected, 4).toString());
-
-        jButton4.setEnabled(false);
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
