@@ -114,6 +114,33 @@ public class Sales extends javax.swing.JFrame {
         }
     }
     
+    public void alert(){
+        try {
+            
+            
+            pst =conn.prepareStatement("select * from product");
+            rs = pst.executeQuery();
+            
+            while(rs.next()){
+                int qty = rs.getInt("ProQty");
+                int reorder =rs.getInt("ProReLevel");
+                
+                if(reorder>=qty){
+                    JOptionPane.showMessageDialog(this,"This Stock is out of range. Time to Reoder!");
+                }
+                
+            }
+            
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Sales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     } 
+    
+    
+    
     public void dbadd(){
         
         DateTimeFormatter dt= DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -178,7 +205,7 @@ public class Sales extends javax.swing.JFrame {
                     
             }
             JOptionPane.showMessageDialog(this, "Sales Completed");
-            
+            alert();
             
         } catch (SQLException ex) {
             Logger.getLogger(Sales.class.getName()).log(Level.SEVERE, null, ex);
@@ -406,7 +433,9 @@ public class Sales extends javax.swing.JFrame {
 
         txtProBal.setText(String.valueOf(bal));
 
-       dbadd();        // TODO add your handling code here:
+       dbadd();
+       this.setVisible(false);
+       new Sales().setVisible(true);
     }//GEN-LAST:event_jLabel8MouseClicked
 
     /**

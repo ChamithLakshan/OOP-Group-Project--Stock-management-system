@@ -419,7 +419,9 @@ public class Purchase extends javax.swing.JFrame {
           
           txtProBal.setText(String.valueOf(bal));
       
-        dbadd();// TODO add your handling code here:
+        dbadd();
+       this.setVisible(false);
+       new Purchase().setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_BtnPurchAddDBMouseClicked
 
     private void BtnPurchAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnPurchAddMouseClicked
