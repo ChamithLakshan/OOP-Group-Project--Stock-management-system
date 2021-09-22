@@ -5,17 +5,184 @@
  */
 package stock;
 
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Asus
  */
 public class Sales extends javax.swing.JFrame {
-
+    Connection conn = DBconnection.getDBconnection().getConnection();
+    PreparedStatement pst;
+    PreparedStatement pst1;
+    PreparedStatement pst2;
+    DefaultTableModel df;
+    ResultSet rs;
     /**
      * Creates new form Sales
      */
     public Sales() {
         initComponents();
+    }
+    public void purchase(){
+        String pcode= txtProCode.getText();
+        
+        try {
+            pst = conn.prepareStatement("select *from product where ProBarcode = ?");
+            pst.setString(1, pcode);
+            rs=pst.executeQuery();
+            
+            if(rs.next()==false){
+                JOptionPane.showMessageDialog(this, "Barcode not Found"); 
+                txtProCode.setText("");
+            }else{
+                String pname=rs.getString("ProName");
+                String retprice=rs.getString("ProRePrice");
+                
+                txtProName.setText(pname.trim());
+                txtProPrice.setText(retprice.trim());
+                txtProQty.requestFocus();
+                            
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Sales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+    }
+    public void Sales(){
+        try {
+            String pcode = txtProCode.getText();
+            
+            pst= conn.prepareStatement("select * from product where ProBarcode = ?");
+            pst.setString(1, pcode);
+            rs =pst.executeQuery();
+            
+            while(rs.next()){
+                int currentQty;
+                currentQty = rs.getInt("ProQty");
+                
+                int price= Integer.parseInt(txtProPrice.getText());
+                int qty= Integer.parseInt(txtProQty.getText());
+            
+                int total= price*qty;
+                
+                if(qty>=currentQty){
+                    JOptionPane.showMessageDialog(this,"Qty is not Enough!!");                
+                }
+                else{
+                    df = (DefaultTableModel)tabPurch.getModel();
+                    df.addRow(new Object[]{
+                    txtProCode.getText(),
+                    txtProName.getText(),
+                    txtProPrice.getText(),
+                    txtProQty.getText(),       
+                    total
+            }
+                    
+            );
+                
+                }
+                
+            }
+             
+            
+            int sum=0;
+            
+            for(int i=0; i<tabPurch.getRowCount();i++){
+                sum= sum+Integer.parseInt(tabPurch.getValueAt(i, 4).toString());
+            }
+            txtProTotCost.setText(String.valueOf(sum));
+            txtProCode.setText("");
+            txtProName.setText("");
+            txtProPrice.setText("");
+            txtProQty.setText("");
+        } catch (SQLException ex) {
+            Logger.getLogger(Sales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void dbadd(){
+        
+        DateTimeFormatter dt= DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now= LocalDateTime.now();
+        String date = dt.format(now);
+        String subtotal = txtProTotCost.getText();
+        String pay = txtProPay.getText();
+        String bal = txtProBal.getText();
+        int lastid=0;
+        
+        String query1 = "insert into sales(Date,SubTotal,Pay,Bal)values(?,?,?,?)";
+        try {
+            pst = conn.prepareStatement(query1,Statement.RETURN_GENERATED_KEYS);
+            
+            pst.setString(1,date);
+            pst.setString(2,subtotal);
+            pst.setString(3,pay);
+            pst.setString(4,bal);
+            
+            pst.executeUpdate();
+            
+            rs =pst.getGeneratedKeys();
+            
+            if(rs.next()){
+                lastid= rs.getInt(1);
+            }            
+            String query2 ="insert into sales_product(SalesID,ProID,Price,Qty,Total)values(?,?,?,?,?)";
+            pst1 =conn.prepareStatement(query2);
+            String productid;
+            String price;
+            String qty;
+            int total=0;
+            
+            for(int i=0; i<tabPurch.getRowCount();i++){
+                productid = (String)tabPurch.getValueAt(i, 0);
+                price = (String)tabPurch.getValueAt(i, 2);
+                qty = (String)tabPurch.getValueAt(i, 3);
+                total = (int)tabPurch.getValueAt(i, 4);
+                
+                pst1.setInt(1, lastid);
+                 pst1.setString(2, productid);
+                  pst1.setString(3, price);
+                   pst1.setString(4, qty); 
+                   pst1.setInt(5, total);
+                   
+                   pst1.executeUpdate();
+                    
+            }
+            
+            String query3 ="update product set ProQty = ProQty - ? where ProBarcode =?";
+            pst2= conn.prepareStatement(query3);
+            
+             for(int i=0; i<tabPurch.getRowCount();i++){
+                productid = (String)tabPurch.getValueAt(i, 0);
+                qty = (String)tabPurch.getValueAt(i, 3);
+               
+                
+                pst2.setString(1,  qty);
+                pst2.setString(2,  productid);                  
+                pst2.executeUpdate();
+                
+                    
+            }
+            JOptionPane.showMessageDialog(this, "Sales Completed");
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Sales.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,13 +197,11 @@ public class Sales extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtVendor = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabPurch = new javax.swing.JTable();
         jLabel20 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -44,13 +209,13 @@ public class Sales extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jTextField18 = new javax.swing.JTextField();
-        jTextField19 = new javax.swing.JTextField();
+        txtProName = new javax.swing.JTextField();
+        txtProPrice = new javax.swing.JTextField();
+        txtProQty = new javax.swing.JTextField();
+        txtProTotCost = new javax.swing.JTextField();
+        txtProPay = new javax.swing.JTextField();
+        txtProBal = new javax.swing.JTextField();
+        txtProCode = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -66,17 +231,6 @@ public class Sales extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("SALES");
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Vendor");
-
-        txtVendor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtVendorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -84,21 +238,13 @@ public class Sales extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 388, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtVendor, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addContainerGap(775, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtVendor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -111,12 +257,22 @@ public class Sales extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("ADD");
         jLabel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Back");
         jLabel9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -136,12 +292,12 @@ public class Sales extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 1030, 60));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabPurch.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -149,7 +305,7 @@ public class Sales extends javax.swing.JFrame {
                 "Product code", "Product name", "Price", "Quantity", "Total"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabPurch);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 830, 280));
 
@@ -194,19 +350,30 @@ public class Sales extends javax.swing.JFrame {
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Balance");
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 380, 110, 30));
-        getContentPane().add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 210, 30));
-        getContentPane().add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 120, 30));
-        getContentPane().add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 110, 30));
-        getContentPane().add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, 130, 30));
-        getContentPane().add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 330, 130, 30));
-        getContentPane().add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 410, 130, 30));
-        getContentPane().add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 170, 30));
+        getContentPane().add(txtProName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 210, 30));
+        getContentPane().add(txtProPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 120, 30));
+        getContentPane().add(txtProQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 110, 30));
+        getContentPane().add(txtProTotCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, 130, 30));
+        getContentPane().add(txtProPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 330, 130, 30));
+        getContentPane().add(txtProBal, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 410, 130, 30));
+
+        txtProCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtProCodeKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtProCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 170, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("ADD");
         jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 51), 4, true));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 140, 110, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vecteezy-abstract-geometric-green-background_WS0321_generated.jpg"))); // NOI18N
@@ -215,9 +382,32 @@ public class Sales extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtVendorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVendorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtVendorActionPerformed
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        this.setVisible(false);// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void txtProCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProCodeKeyPressed
+        if(evt.getExtendedKeyCode()==KeyEvent.VK_ENTER){
+           purchase();
+
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_txtProCodeKeyPressed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        Sales();
+// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        int pay = Integer.parseInt(txtProPay.getText());
+        int subtotal = Integer.parseInt(txtProTotCost.getText());
+
+        int bal =  pay-subtotal;
+
+        txtProBal.setText(String.valueOf(bal));
+
+       dbadd();        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -264,7 +454,6 @@ public class Sales extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -272,14 +461,13 @@ public class Sales extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JComboBox<String> txtVendor;
+    private javax.swing.JTable tabPurch;
+    private javax.swing.JTextField txtProBal;
+    private javax.swing.JTextField txtProCode;
+    private javax.swing.JTextField txtProName;
+    private javax.swing.JTextField txtProPay;
+    private javax.swing.JTextField txtProPrice;
+    private javax.swing.JTextField txtProQty;
+    private javax.swing.JTextField txtProTotCost;
     // End of variables declaration//GEN-END:variables
 }

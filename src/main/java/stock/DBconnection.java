@@ -20,7 +20,7 @@ public class DBconnection {
     
     private DBconnection(){
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/stock_managment","root","");
         } catch (SQLException ex) {
             Logger.getLogger(DBconnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -31,9 +31,7 @@ public class DBconnection {
             dbConnection = new DBconnection();
         }
         return dbConnection;
-    }
-    
-    
+    }   
     public Connection getConnection(){
         return this.con;
     }

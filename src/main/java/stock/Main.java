@@ -30,12 +30,12 @@ public class Main extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        BtnMainPurch = new javax.swing.JLabel();
+        BtnMainSales = new javax.swing.JLabel();
+        BtnMainProduct = new javax.swing.JLabel();
+        BtnMainLog = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        BtnMainVendor = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,32 +73,53 @@ public class Main extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 840, 40));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("PUCHASE");
-        jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 160, 210));
+        BtnMainPurch.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        BtnMainPurch.setForeground(new java.awt.Color(255, 255, 255));
+        BtnMainPurch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnMainPurch.setText("PUCHASE");
+        BtnMainPurch.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
+        BtnMainPurch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnMainPurchMouseClicked(evt);
+            }
+        });
+        jPanel1.add(BtnMainPurch, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 160, 210));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("SALES");
-        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, 160, 210));
+        BtnMainSales.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        BtnMainSales.setForeground(new java.awt.Color(255, 255, 255));
+        BtnMainSales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnMainSales.setText("SALES");
+        BtnMainSales.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
+        BtnMainSales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnMainSalesMouseClicked(evt);
+            }
+        });
+        jPanel1.add(BtnMainSales, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, 160, 210));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("PRODUCT");
-        jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 160, 210));
+        BtnMainProduct.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        BtnMainProduct.setForeground(new java.awt.Color(255, 255, 255));
+        BtnMainProduct.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnMainProduct.setText("PRODUCT");
+        BtnMainProduct.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
+        BtnMainProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnMainProductMouseClicked(evt);
+            }
+        });
+        jPanel1.add(BtnMainProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 160, 210));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 160, 210));
+        BtnMainLog.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        BtnMainLog.setForeground(new java.awt.Color(255, 255, 255));
+        BtnMainLog.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnMainLog.setText("LOGOUT");
+        BtnMainLog.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
+        BtnMainLog.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnMainLogMouseClicked(evt);
+            }
+        });
+        jPanel1.add(BtnMainLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 160, 210));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,12 +127,17 @@ public class Main extends javax.swing.JFrame {
         jLabel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 330, 160, 210));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("VENDOR");
-        jLabel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 160, 210));
+        BtnMainVendor.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        BtnMainVendor.setForeground(new java.awt.Color(255, 255, 255));
+        BtnMainVendor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnMainVendor.setText("VENDOR");
+        BtnMainVendor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
+        BtnMainVendor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnMainVendorMouseClicked(evt);
+            }
+        });
+        jPanel1.add(BtnMainVendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 160, 210));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vecteezy-abstract-geometric-green-background_WS0321_generated.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 620));
@@ -119,7 +145,36 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 620));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnMainVendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMainVendorMouseClicked
+        Vendor v = new Vendor();
+        v.setVisible(true);
+    }//GEN-LAST:event_BtnMainVendorMouseClicked
+
+    private void BtnMainPurchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMainPurchMouseClicked
+        Purchase pu = new Purchase();
+        pu.setVisible(true);
+    }//GEN-LAST:event_BtnMainPurchMouseClicked
+
+    private void BtnMainSalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMainSalesMouseClicked
+        Sales s = new Sales();
+        s.setVisible(true);
+    }//GEN-LAST:event_BtnMainSalesMouseClicked
+
+    private void BtnMainProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMainProductMouseClicked
+        Product pr = new Product();
+        pr.setVisible(true);
+    }//GEN-LAST:event_BtnMainProductMouseClicked
+
+    private void BtnMainLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMainLogMouseClicked
+        Login lg = new Login();
+        lg.setVisible(true);
+        
+        Main m = new Main();
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnMainLogMouseClicked
 
     /**
      * @param args the command line arguments
@@ -157,13 +212,13 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BtnMainLog;
+    private javax.swing.JLabel BtnMainProduct;
+    private javax.swing.JLabel BtnMainPurch;
+    private javax.swing.JLabel BtnMainSales;
+    private javax.swing.JLabel BtnMainVendor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

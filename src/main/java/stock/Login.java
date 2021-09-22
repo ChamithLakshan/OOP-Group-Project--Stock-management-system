@@ -5,12 +5,22 @@
  */
 package stock;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Asus
+ * @author Niros
  */
 public class Login extends javax.swing.JFrame {
-
+    Connection conn = DBconnection.getDBconnection().getConnection();
+    PreparedStatement pst;
+    ResultSet rs;
     /**
      * Creates new form Login
      */
@@ -37,7 +47,6 @@ public class Login extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        Login_Password = new javax.swing.JTextField();
         Login_pws = new javax.swing.JPasswordField();
         jTextField2 = new javax.swing.JTextField();
         Login_User = new javax.swing.JTextField();
@@ -170,13 +179,11 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setText("PASSWORD");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 240, 50));
 
-        Login_Password.setBackground(new java.awt.Color(0, 204, 102));
-        Login_Password.setForeground(new java.awt.Color(255, 255, 255));
-        Login_Password.setBorder(null);
-        jPanel1.add(Login_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 270, 30));
-
         Login_pws.setBackground(new java.awt.Color(0, 204, 102));
-        jPanel1.add(Login_pws, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 350, 270, 30));
+        Login_pws.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Login_pws.setForeground(new java.awt.Color(255, 255, 255));
+        Login_pws.setBorder(null);
+        jPanel1.add(Login_pws, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 270, 30));
 
         jTextField2.setBackground(new java.awt.Color(0, 51, 51));
         jTextField2.setText("jTextField2");
@@ -252,18 +259,47 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void Btn_LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_LoginMouseClicked
-        String UserName =Login_User.getText();
+        /*String UserName =Login_User.getText();
         String Password = Login_pws.getText();
         
         if(Password.contains("one")&&(UserName.contains("king"))){
         Login_User.setText(null);
         Login_pws.setText(null);
         
-        Main v =new Main();
-        v.setVisible(true); 
-        systemExit();
-        }
+        Main m =new Main();
+        m.setVisible(true); 
         
+        }
+        this.setVisible(false);*/
+        //
+ 
+        
+        
+        
+        if (Login_User == null || Login_pws == null) {
+            JOptionPane.showMessageDialog(null,"fields are empty");
+        }
+        else{
+            try {
+                pst = conn.prepareStatement("select * from login where UserName=? and Password=? ");
+                
+                pst.setString(1, Login_User.getText());
+                pst.setString(2, Login_pws.getText()); 
+                
+                rs = pst.executeQuery();
+                
+                if(rs.next()){
+                    Main h = new Main();
+                    h.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null,"Incorrect User Name");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+        this.setVisible(false);
+    
     }//GEN-LAST:event_Btn_LoginMouseClicked
 
     /**
@@ -303,7 +339,6 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Btn_Login;
-    private javax.swing.JTextField Login_Password;
     private javax.swing.JTextField Login_User;
     private javax.swing.JPasswordField Login_pws;
     private javax.swing.JLabel jLabel1;
