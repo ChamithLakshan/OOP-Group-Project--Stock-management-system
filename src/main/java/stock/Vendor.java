@@ -5,19 +5,65 @@
  */
 package stock;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Asus
  */
 public class Vendor extends javax.swing.JFrame {
 
+    Connection conn = DBconnection.getDBconnection().getConnection();
+    PreparedStatement pst;
+    DefaultTableModel df;
+    ResultSet rs;
     /**
      * Creates new form Vendor
      */
     public Vendor() {
         initComponents();
+        load();
     }
 
+    public void load(){
+        try {
+            int a;
+             
+            pst= conn.prepareStatement("select * from vendor");
+            ResultSet rs=pst.executeQuery();
+            
+            ResultSetMetaData rd =rs.getMetaData();
+            
+            a = rd.getColumnCount();
+            
+            df= (DefaultTableModel)jTable1.getModel();
+            df.setRowCount(0);
+            
+            while(rs.next()){
+                Vector v2 = new Vector();
+                for(int i=0; i<=a; i++){
+                    v2.add(rs.getString("ID"));
+                    v2.add(rs.getString("Name"));
+                    v2.add(rs.getString("Phone"));
+                    v2.add(rs.getString("Email"));
+                    v2.add(rs.getString("Address"));
+                }
+                df.addRow(v2);
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Vendor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,7 +77,7 @@ public class Vendor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        BtnAdd = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -40,10 +86,10 @@ public class Vendor extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        TxtVenTel = new javax.swing.JTextField();
+        TxtVenMail = new javax.swing.JTextField();
+        TxtVenAdd = new javax.swing.JTextField();
+        TxtVenName = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -66,30 +112,55 @@ public class Vendor extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("EDIT");
         jLabel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
-        jLabel8.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("ADD");
-        jLabel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        BtnAdd.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
+        BtnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnAdd.setText("ADD");
+        BtnAdd.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        BtnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnAddMouseClicked(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("DELETE");
         jLabel9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("CANCEL");
         jLabel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("BACK");
         jLabel11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -98,7 +169,7 @@ public class Vendor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -109,7 +180,7 @@ public class Vendor extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(176, 176, 176)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
@@ -157,16 +228,16 @@ public class Vendor extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Vendor Name");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 150, 30));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 230, 30));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 230, 30));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 230, 30));
+        jPanel1.add(TxtVenTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 230, 30));
+        jPanel1.add(TxtVenMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 230, 30));
+        jPanel1.add(TxtVenAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 230, 30));
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        TxtVenName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                TxtVenNameActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 230, 30));
+        jPanel1.add(TxtVenName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 230, 30));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -193,14 +264,134 @@ public class Vendor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void TxtVenNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtVenNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_TxtVenNameActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
+         df= (DefaultTableModel)jTable1.getModel();
+        
+        int seclected = jTable1.getSelectedRow();
+        int id = Integer.parseInt(df.getValueAt(seclected,0).toString());
+        
+        TxtVenName.setText(df.getValueAt(seclected,1).toString());
+        TxtVenTel.setText(df.getValueAt(seclected,2).toString());
+        TxtVenMail.setText(df.getValueAt(seclected,3).toString());
+        TxtVenAdd.setText(df.getValueAt(seclected,4).toString());
+        
+        BtnAdd.setEnabled(false);
 
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void BtnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAddMouseClicked
+        try {
+            
+            String venname=TxtVenName.getText();
+            String venphone=TxtVenTel.getText();
+            String venmail=TxtVenMail.getText();
+            String venadd=TxtVenAdd.getText();
+            
+            pst = conn.prepareStatement("insert into Vendor(Name,Phone,Email,Address)VALUES(?, ?, ?, ?)");
+            
+            pst.setString(1, venname);
+            pst.setString(2, venphone);
+            pst.setString(3, venmail);
+            pst.setString(4, venadd);   
+            pst.executeUpdate();
+            
+            JOptionPane.showMessageDialog(this, "vendor Addedddd");
+            
+            TxtVenName.setText("");
+            TxtVenTel.setText("");
+            TxtVenMail.setText("");
+            TxtVenAdd.setText(""); 
+            
+            TxtVenName.requestFocus();
+            load();                       
+        } catch (SQLException ex) {
+            Logger.getLogger(Vendor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_BtnAddMouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+       df= (DefaultTableModel)jTable1.getModel();
+        
+        int seclected = jTable1.getSelectedRow();
+        int id = Integer.parseInt(df.getValueAt(seclected,0).toString());
+        
+            String venname=TxtVenName.getText();
+            String venphone=TxtVenTel.getText();
+            String venmail=TxtVenMail.getText();
+            String venadd=TxtVenAdd.getText();
+            
+        try {
+            pst = conn.prepareStatement("update Vendor set Name=?,Phone=?,Email=?,Address=? where ID=?");
+            pst.setString(1, venname);
+            pst.setString(2, venphone);
+            pst.setString(3, venmail);
+            pst.setString(4, venadd);
+            pst.setInt(5, id);            
+            pst.executeUpdate();
+            
+            JOptionPane.showMessageDialog(this, "Vendor Updated");
+            
+            TxtVenName.setText("");
+            TxtVenTel.setText("");
+            TxtVenMail.setText("");
+            TxtVenAdd.setText(""); 
+            
+            TxtVenName.requestFocus();
+            load();
+            BtnAdd.setEnabled(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Vendor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        // TODO add your handling code here:
+        df= (DefaultTableModel)jTable1.getModel();
+        
+        int seclected = jTable1.getSelectedRow();
+        int id = Integer.parseInt(df.getValueAt(seclected,0).toString()); 
+        
+        try {
+            pst = conn.prepareStatement("delete from Vendor where ID=?");
+            pst.setInt(1, id);            
+            pst.executeUpdate();
+            
+            JOptionPane.showMessageDialog(this, "Vendor Deleted");
+            
+            TxtVenName.setText("");
+            TxtVenTel.setText("");
+            TxtVenMail.setText("");
+            TxtVenAdd.setText(""); 
+            
+            TxtVenName.requestFocus();
+            load();
+            BtnAdd.setEnabled(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Vendor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        // TODO add your handling code here:
+        TxtVenName.setText("");
+        TxtVenTel.setText("");
+        TxtVenMail.setText("");
+        TxtVenAdd.setText(""); 
+            
+        TxtVenName.requestFocus();
+        load();
+        BtnAdd.setEnabled(true);
+    }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+         this.setVisible(false);
+    }//GEN-LAST:event_jLabel11MouseClicked
 
     /**
      * @param args the command line arguments
@@ -238,6 +429,11 @@ public class Vendor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BtnAdd;
+    private javax.swing.JTextField TxtVenAdd;
+    private javax.swing.JTextField TxtVenMail;
+    private javax.swing.JTextField TxtVenName;
+    private javax.swing.JTextField TxtVenTel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -247,16 +443,11 @@ public class Vendor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
