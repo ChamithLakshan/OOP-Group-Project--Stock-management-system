@@ -64,10 +64,10 @@ public class Purchase extends javax.swing.JFrame {
                 txtProCode.setText("");
             }else{
                 String pname=rs.getString("ProName");
-                String retprice=rs.getString("ProRePrice");
+                String Coprice=rs.getString("ProCoPrice");
                 
                 txtProName.setText(pname.trim());
-                txtProPrice.setText(retprice.trim());
+                txtProPrice.setText(Coprice.trim());
                 txtProQty.requestFocus();
                             
             }
