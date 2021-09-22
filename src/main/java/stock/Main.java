@@ -78,6 +78,11 @@ public class Main extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("PUCHASE");
         jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 160, 210));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
@@ -85,6 +90,11 @@ public class Main extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("SALES");
         jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, 160, 210));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
@@ -92,12 +102,23 @@ public class Main extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("PRODUCT");
         jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 160, 210));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("LOGOUT");
         jLabel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 160, 210));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
@@ -111,6 +132,11 @@ public class Main extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("VENDOR");
         jLabel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 8, true));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 160, 210));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vecteezy-abstract-geometric-green-background_WS0321_generated.jpg"))); // NOI18N
@@ -120,6 +146,27 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        Vendor.setVisible(true);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        Product.setVisible(true);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        Purchase.setVisible(true);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        Sales.setVisible(true);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        this.setVisible(false);
+        Login.setVisible(true);
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
