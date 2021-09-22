@@ -37,13 +37,14 @@ public class Login extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        Login_Password = new javax.swing.JTextField();
+        Login_pws = new javax.swing.JPasswordField();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        Login_User = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        Btn_Login = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,7 +114,7 @@ public class Login extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 114, Short.MAX_VALUE)
+            .addGap(0, 270, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,26 +170,29 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setText("PASSWORD");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 240, 50));
 
-        jTextField1.setBackground(new java.awt.Color(0, 204, 102));
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 270, 30));
+        Login_Password.setBackground(new java.awt.Color(0, 204, 102));
+        Login_Password.setForeground(new java.awt.Color(255, 255, 255));
+        Login_Password.setBorder(null);
+        jPanel1.add(Login_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 270, 30));
+
+        Login_pws.setBackground(new java.awt.Color(0, 204, 102));
+        jPanel1.add(Login_pws, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 350, 270, 30));
 
         jTextField2.setBackground(new java.awt.Color(0, 51, 51));
         jTextField2.setText("jTextField2");
         jTextField2.setBorder(null);
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 270, 5));
 
-        jTextField3.setBackground(new java.awt.Color(0, 204, 102));
-        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setBorder(null);
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        Login_User.setBackground(new java.awt.Color(0, 204, 102));
+        Login_User.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Login_User.setForeground(new java.awt.Color(255, 255, 255));
+        Login_User.setBorder(null);
+        Login_User.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                Login_UserActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 270, 30));
+        jPanel1.add(Login_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 270, 30));
 
         jTextField4.setBackground(new java.awt.Color(0, 51, 51));
         jTextField4.setText("jTextField2");
@@ -203,24 +207,29 @@ public class Login extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 51, 51));
         jPanel3.setForeground(new java.awt.Color(0, 51, 51));
 
-        jLabel2.setBackground(new java.awt.Color(0, 51, 51));
-        jLabel2.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("LOGIN");
-        jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 4, true));
+        Btn_Login.setBackground(new java.awt.Color(0, 51, 51));
+        Btn_Login.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
+        Btn_Login.setForeground(new java.awt.Color(255, 255, 255));
+        Btn_Login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Btn_Login.setText("LOGIN");
+        Btn_Login.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 4, true));
+        Btn_Login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_LoginMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+            .addComponent(Btn_Login, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Btn_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, 280, 40));
@@ -231,15 +240,31 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 630));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void Login_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_UserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_Login_UserActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void Btn_LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_LoginMouseClicked
+        String UserName =Login_User.getText();
+        String Password = Login_pws.getText();
+        
+        if(Password.contains("one")&&(UserName.contains("king"))){
+        Login_User.setText(null);
+        Login_pws.setText(null);
+        
+        Main v =new Main();
+        v.setVisible(true); 
+        systemExit();
+        }
+        
+    }//GEN-LAST:event_Btn_LoginMouseClicked
 
     /**
      * @param args the command line arguments
@@ -277,8 +302,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Btn_Login;
+    private javax.swing.JTextField Login_Password;
+    private javax.swing.JTextField Login_User;
+    private javax.swing.JPasswordField Login_pws;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -290,10 +318,12 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
+
+    private void systemExit() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
