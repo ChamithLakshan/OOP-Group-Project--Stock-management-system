@@ -12,15 +12,15 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 /**
  *
- * @author Asus
+ * @author Niros
  */
 public class Login extends javax.swing.JFrame {
     Connection conn = DBconnection.getDBconnection().getConnection();
     PreparedStatement pst;
     ResultSet rs;
-
     /**
      * Creates new form Login
      */
@@ -180,6 +180,9 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 240, 50));
 
         Login_pws.setBackground(new java.awt.Color(0, 204, 102));
+        Login_pws.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Login_pws.setForeground(new java.awt.Color(255, 255, 255));
+        Login_pws.setBorder(null);
         jPanel1.add(Login_pws, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 270, 30));
 
         jTextField2.setBackground(new java.awt.Color(0, 51, 51));
@@ -256,7 +259,24 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void Btn_LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_LoginMouseClicked
-              if (Login_User == null || Login_pws == null) {
+        /*String UserName =Login_User.getText();
+        String Password = Login_pws.getText();
+        
+        if(Password.contains("one")&&(UserName.contains("king"))){
+        Login_User.setText(null);
+        Login_pws.setText(null);
+        
+        Main m =new Main();
+        m.setVisible(true); 
+        
+        }
+        this.setVisible(false);*/
+        //
+ 
+        
+        
+        
+        if (Login_User == null || Login_pws == null) {
             JOptionPane.showMessageDialog(null,"fields are empty");
         }
         else{
@@ -279,7 +299,7 @@ public class Login extends javax.swing.JFrame {
             } 
         }
         this.setVisible(false);
-        
+    
     }//GEN-LAST:event_Btn_LoginMouseClicked
 
     /**

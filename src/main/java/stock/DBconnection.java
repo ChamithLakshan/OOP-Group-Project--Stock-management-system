@@ -31,9 +31,7 @@ public class DBconnection {
             dbConnection = new DBconnection();
         }
         return dbConnection;
-    }
-    
-    
+    }   
     public Connection getConnection(){
         return this.con;
     }

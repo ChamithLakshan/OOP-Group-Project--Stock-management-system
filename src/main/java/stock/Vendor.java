@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -15,12 +15,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Asus
  */
 public class Vendor extends javax.swing.JFrame {
-
     Connection conn = DBconnection.getDBconnection().getConnection();
     PreparedStatement pst;
     DefaultTableModel df;
@@ -31,8 +31,8 @@ public class Vendor extends javax.swing.JFrame {
     public Vendor() {
         initComponents();
         load();
+        
     }
-
     public void load(){
         try {
             int a;
@@ -62,8 +62,8 @@ public class Vendor extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Vendor.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
         
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,11 +76,11 @@ public class Vendor extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        BtnEdit = new javax.swing.JLabel();
         BtnAdd = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        BtnDelete = new javax.swing.JLabel();
+        BtnCancel = new javax.swing.JLabel();
+        BtnBack = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -107,14 +107,14 @@ public class Vendor extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLabel7.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("EDIT");
-        jLabel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        BtnEdit.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
+        BtnEdit.setForeground(new java.awt.Color(255, 255, 255));
+        BtnEdit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnEdit.setText("EDIT");
+        BtnEdit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        BtnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
+                BtnEditMouseClicked(evt);
             }
         });
 
@@ -129,36 +129,36 @@ public class Vendor extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("DELETE");
-        jLabel9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        BtnDelete.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
+        BtnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        BtnDelete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnDelete.setText("DELETE");
+        BtnDelete.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        BtnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
+                BtnDeleteMouseClicked(evt);
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("CANCEL");
-        jLabel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        BtnCancel.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
+        BtnCancel.setForeground(new java.awt.Color(255, 255, 255));
+        BtnCancel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnCancel.setText("CANCEL");
+        BtnCancel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        BtnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
+                BtnCancelMouseClicked(evt);
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("BACK");
-        jLabel11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+        BtnBack.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
+        BtnBack.setForeground(new java.awt.Color(255, 255, 255));
+        BtnBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnBack.setText("BACK");
+        BtnBack.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        BtnBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
+                BtnBackMouseClicked(evt);
             }
         });
 
@@ -170,10 +170,10 @@ public class Vendor extends javax.swing.JFrame {
                 .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49))
         );
         jPanel2Layout.setVerticalGroup(
@@ -182,13 +182,13 @@ public class Vendor extends javax.swing.JFrame {
                 .addGap(176, 176, 176)
                 .addComponent(BtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
 
@@ -269,7 +269,7 @@ public class Vendor extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtVenNameActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-         df= (DefaultTableModel)jTable1.getModel();
+        df= (DefaultTableModel)jTable1.getModel();
         
         int seclected = jTable1.getSelectedRow();
         int id = Integer.parseInt(df.getValueAt(seclected,0).toString());
@@ -280,6 +280,7 @@ public class Vendor extends javax.swing.JFrame {
         TxtVenAdd.setText(df.getValueAt(seclected,4).toString());
         
         BtnAdd.setEnabled(false);
+// TODO add your handling code here:
 
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -311,11 +312,11 @@ public class Vendor extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Vendor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+// TODO add your handling code here:
     }//GEN-LAST:event_BtnAddMouseClicked
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-       df= (DefaultTableModel)jTable1.getModel();
+    private void BtnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEditMouseClicked
+        df= (DefaultTableModel)jTable1.getModel();
         
         int seclected = jTable1.getSelectedRow();
         int id = Integer.parseInt(df.getValueAt(seclected,0).toString());
@@ -346,11 +347,10 @@ public class Vendor extends javax.swing.JFrame {
             BtnAdd.setEnabled(true);
         } catch (SQLException ex) {
             Logger.getLogger(Vendor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jLabel7MouseClicked
+        }    // TODO add your handling code here:
+    }//GEN-LAST:event_BtnEditMouseClicked
 
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        // TODO add your handling code here:
+    private void BtnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDeleteMouseClicked
         df= (DefaultTableModel)jTable1.getModel();
         
         int seclected = jTable1.getSelectedRow();
@@ -373,11 +373,10 @@ public class Vendor extends javax.swing.JFrame {
             BtnAdd.setEnabled(true);
         } catch (SQLException ex) {
             Logger.getLogger(Vendor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jLabel9MouseClicked
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_BtnDeleteMouseClicked
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        // TODO add your handling code here:
+    private void BtnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelMouseClicked
         TxtVenName.setText("");
         TxtVenTel.setText("");
         TxtVenMail.setText("");
@@ -385,13 +384,13 @@ public class Vendor extends javax.swing.JFrame {
             
         TxtVenName.requestFocus();
         load();
-        BtnAdd.setEnabled(true);
-    }//GEN-LAST:event_jLabel10MouseClicked
+        BtnAdd.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_BtnCancelMouseClicked
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+    private void BtnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnBackMouseClicked
+        this.setVisible(false);
         // TODO add your handling code here:
-         this.setVisible(false);
-    }//GEN-LAST:event_jLabel11MouseClicked
+    }//GEN-LAST:event_BtnBackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -430,20 +429,20 @@ public class Vendor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BtnAdd;
+    private javax.swing.JLabel BtnBack;
+    private javax.swing.JLabel BtnCancel;
+    private javax.swing.JLabel BtnDelete;
+    private javax.swing.JLabel BtnEdit;
     private javax.swing.JTextField TxtVenAdd;
     private javax.swing.JTextField TxtVenMail;
     private javax.swing.JTextField TxtVenName;
     private javax.swing.JTextField TxtVenTel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
