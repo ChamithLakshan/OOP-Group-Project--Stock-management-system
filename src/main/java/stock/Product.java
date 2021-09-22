@@ -217,7 +217,7 @@ public class Product extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Product  name", "Description", "Quantity", "Barcode", "Cost price", "Retail Price", "Restore limit"
+                "Id", "Product  name", "Description", "Barcode", "Cost price", "Retail Price", "Quantity", "Restore limit"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
