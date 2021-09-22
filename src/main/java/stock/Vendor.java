@@ -31,6 +31,7 @@ public class Vendor extends javax.swing.JFrame {
     public Vendor() {
         initComponents();
         load();
+        this.setLocationRelativeTo(this);
         
     }
     public void load(){

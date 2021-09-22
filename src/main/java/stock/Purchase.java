@@ -35,6 +35,7 @@ public class Purchase extends javax.swing.JFrame {
     public Purchase() {
         initComponents();
         Vendor();
+        this.setLocationRelativeTo(this);    
     }
     public void Vendor(){
         try {

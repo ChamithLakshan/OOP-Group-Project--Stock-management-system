@@ -31,6 +31,7 @@ public class Product extends javax.swing.JFrame {
     public Product() {
         initComponents();
         load();
+        this.setLocationRelativeTo(this);
     }
     public void load(){
          try {

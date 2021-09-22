@@ -34,6 +34,7 @@ public class Sales extends javax.swing.JFrame {
      */
     public Sales() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
     public void purchase(){
         String pcode= txtProCode.getText();

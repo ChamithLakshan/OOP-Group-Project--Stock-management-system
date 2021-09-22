@@ -16,6 +16,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
 
     /**
@@ -140,7 +141,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(BtnMainVendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 160, 210));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vecteezy-abstract-geometric-green-background_WS0321_generated.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 620));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 620));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 620));
 
