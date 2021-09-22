@@ -5,12 +5,22 @@
  */
 package stock;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Asus
  */
 public class Login extends javax.swing.JFrame {
-
+    Connection conn = DBconnection.getDBconnection().getConnection();
+    PreparedStatement pst;
+    ResultSet rs;
     /**
      * Creates new form Login
      */
@@ -37,9 +47,9 @@ public class Login extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtPass = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -169,26 +179,26 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setText("PASSWORD");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 240, 50));
 
-        jTextField1.setBackground(new java.awt.Color(0, 204, 102));
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 270, 30));
+        txtPass.setBackground(new java.awt.Color(0, 204, 102));
+        txtPass.setForeground(new java.awt.Color(255, 255, 255));
+        txtPass.setBorder(null);
+        jPanel1.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 270, 30));
 
         jTextField2.setBackground(new java.awt.Color(0, 51, 51));
         jTextField2.setText("jTextField2");
         jTextField2.setBorder(null);
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 270, 5));
 
-        jTextField3.setBackground(new java.awt.Color(0, 204, 102));
-        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setBorder(null);
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtUser.setBackground(new java.awt.Color(0, 204, 102));
+        txtUser.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtUser.setForeground(new java.awt.Color(255, 255, 255));
+        txtUser.setBorder(null);
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtUserActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 270, 30));
+        jPanel1.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 270, 30));
 
         jTextField4.setBackground(new java.awt.Color(0, 51, 51));
         jTextField4.setText("jTextField2");
@@ -209,6 +219,11 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("LOGIN");
         jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 4, true));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -233,13 +248,39 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtUserActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        if (txtUser == null || txtPass == null) {
+            JOptionPane.showMessageDialog(null,"fields are empty");
+        }
+        else{
+            try {
+                pst = conn.prepareStatement("select * from login where user_name=? and password=? ");
+                
+                pst.setString(1, txtUser.getText());
+                pst.setString(2, txtPass.getText()); 
+                
+                rs = pst.executeQuery();
+                
+                if(rs.next()){
+                    Main h = new Main();
+                    h.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null,"Incorrect User Name");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -290,10 +331,10 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField txtPass;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
