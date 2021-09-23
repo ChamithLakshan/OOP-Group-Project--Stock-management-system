@@ -279,7 +279,7 @@ public class Login extends javax.swing.JFrame {
         
         
         if (Login_User == null || Login_pws == null) {
-            JOptionPane.showMessageDialog(null,"fields are empty");
+            JOptionPane.showMessageDialog(null,"Fields are empty");
         }
         else{
             try {
@@ -294,7 +294,7 @@ public class Login extends javax.swing.JFrame {
                     Main h = new Main();
                     h.setVisible(true);
                 }else{
-                    JOptionPane.showMessageDialog(null,"Incorrect User Name");
+                    JOptionPane.showMessageDialog(null,"Incorrect User Name or Password");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

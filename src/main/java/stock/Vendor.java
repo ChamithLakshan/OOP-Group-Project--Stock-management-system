@@ -302,7 +302,7 @@ public class Vendor extends javax.swing.JFrame {
             pst.setString(4, venadd);   
             pst.executeUpdate();
             
-            JOptionPane.showMessageDialog(this, "vendor Addedddd");
+            JOptionPane.showMessageDialog(this, "vendor Added");
             
             TxtVenName.setText("");
             TxtVenTel.setText("");

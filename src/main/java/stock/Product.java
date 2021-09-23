@@ -326,7 +326,7 @@ public class Product extends javax.swing.JFrame {
             
             pst.executeUpdate();
             
-            JOptionPane.showMessageDialog(this, "Product Addedddd");
+            JOptionPane.showMessageDialog(this, "Product Added");
             
             ProName.setText("");
             ProDes.setText("");
