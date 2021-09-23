@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2021 at 06:59 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.2
+-- Generation Time: Sep 23, 2021 at 03:41 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,6 +57,14 @@ CREATE TABLE `product` (
   `ProReLevel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`ProID`, `ProName`, `ProDescription`, `ProBarcode`, `ProCoPrice`, `ProRePrice`, `ProQty`, `ProReLevel`) VALUES
+(1, 'Inguru Biscuits', '80g small pack', 11111, 50, 60, 100, 10),
+(2, 'Chocolate Biscuits', '100g Double Layer pack', 22222, 60, 75, 80, 10);
+
 -- --------------------------------------------------------
 
 --
@@ -72,6 +80,14 @@ CREATE TABLE `purchase` (
   `Balance` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `purchase`
+--
+
+INSERT INTO `purchase` (`PurID`, `Date`, `PurVendor`, `Subtotal`, `Pay`, `Balance`) VALUES
+(1, '2021-09-22', 'ishan', 5000, 50, 4950),
+(2, '2021-09-22', 'ishan', 7020, 40, 6980);
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +102,14 @@ CREATE TABLE `purchase_item` (
   `Qty` int(11) NOT NULL,
   `Total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `purchase_item`
+--
+
+INSERT INTO `purchase_item` (`ItemID`, `PurchID`, `ProID`, `RetPrice`, `Qty`, `Total`) VALUES
+(1, 1, 12345, 100, 50, 5000),
+(2, 2, 12345, 90, 78, 7020);
 
 -- --------------------------------------------------------
 
@@ -129,6 +153,19 @@ CREATE TABLE `vendor` (
   `Email` varchar(255) NOT NULL,
   `Address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vendor`
+--
+
+INSERT INTO `vendor` (`ID`, `Name`, `Phone`, `Email`, `Address`) VALUES
+(1, 'ishan', 755051454, 'ishan@gmail.com', 'kurunegala'),
+(2, 'Bihan', 754780230, 'bihan@gmail.com', 'panadura'),
+(4, 'Niroshan', 761234567, 'niro@gmail.com', 'Colombo'),
+(5, 'Chamith', 764327891, 'chamitha@gmail.com', 'Ambalangoda'),
+(6, 'Shehan', 780126578, 'Shehan@gmail.com', 'Negambo'),
+(7, 'Jeyan', 729764380, 'jeyan@gamil.com', 'Jaffna'),
+(8, 'Veress', 741236789, 'veress@gmail.com', 'Jaffna');
 
 --
 -- Indexes for dumped tables
@@ -184,19 +221,19 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `ProID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ProID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `purchase`
 --
 ALTER TABLE `purchase`
-  MODIFY `PurID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PurID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `purchase_item`
 --
 ALTER TABLE `purchase_item`
-  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sales`
@@ -214,7 +251,7 @@ ALTER TABLE `sales_product`
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
