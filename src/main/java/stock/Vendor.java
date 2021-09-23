@@ -145,7 +145,7 @@ public class Vendor extends javax.swing.JFrame {
         BtnCancel.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
         BtnCancel.setForeground(new java.awt.Color(255, 255, 255));
         BtnCancel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BtnCancel.setText("CANCEL");
+        BtnCancel.setText("CLEAR");
         BtnCancel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         BtnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

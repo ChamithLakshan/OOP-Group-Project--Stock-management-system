@@ -148,7 +148,7 @@ public class Product extends javax.swing.JFrame {
         BtnProCancel.setFont(new java.awt.Font("Perpetua", 1, 14)); // NOI18N
         BtnProCancel.setForeground(new java.awt.Color(255, 255, 255));
         BtnProCancel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BtnProCancel.setText("CANCEL");
+        BtnProCancel.setText("CLEAR");
         BtnProCancel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         BtnProCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
