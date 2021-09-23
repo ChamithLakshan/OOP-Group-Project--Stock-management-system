@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2021 at 03:41 PM
+-- Generation Time: Sep 23, 2021 at 04:01 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -80,14 +80,6 @@ CREATE TABLE `purchase` (
   `Balance` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `purchase`
---
-
-INSERT INTO `purchase` (`PurID`, `Date`, `PurVendor`, `Subtotal`, `Pay`, `Balance`) VALUES
-(1, '2021-09-22', 'ishan', 5000, 50, 4950),
-(2, '2021-09-22', 'ishan', 7020, 40, 6980);
-
 -- --------------------------------------------------------
 
 --
@@ -102,14 +94,6 @@ CREATE TABLE `purchase_item` (
   `Qty` int(11) NOT NULL,
   `Total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `purchase_item`
---
-
-INSERT INTO `purchase_item` (`ItemID`, `PurchID`, `ProID`, `RetPrice`, `Qty`, `Total`) VALUES
-(1, 1, 12345, 100, 50, 5000),
-(2, 2, 12345, 90, 78, 7020);
 
 -- --------------------------------------------------------
 
@@ -227,13 +211,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `purchase`
 --
 ALTER TABLE `purchase`
-  MODIFY `PurID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `PurID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `purchase_item`
 --
 ALTER TABLE `purchase_item`
-  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `sales`
