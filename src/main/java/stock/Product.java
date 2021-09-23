@@ -360,7 +360,7 @@ public class Product extends javax.swing.JFrame {
         
         try {
           
-            pst = conn.prepareStatement("update Product set ProName=?,ProDescription=?,ProBarcode=?,ProCoPrice=?,ProRePrice=?,ProQty=?,ProReLevel=?");
+            pst = conn.prepareStatement("update Product set ProName=?,ProDescription=?,ProBarcode=?,ProCoPrice=?,ProRePrice=?,ProQty=?,ProReLevel=? where ProID=?");
             
             pst.setString(1, proname);
             pst.setString(2, prodes);
